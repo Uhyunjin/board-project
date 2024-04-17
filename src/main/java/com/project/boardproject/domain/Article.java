@@ -5,19 +5,22 @@ import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @ToString
 @Table(indexes = {
         @Index(columnList = "title"),
-        @Index(columnList = "hasgtag"),
+        @Index(columnList = "hashtag"),
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 }) //검색해줄것들, 근데 사이즈가 너무 크면 안됌
@@ -28,12 +31,18 @@ public class Article {
     private Long id;
     // 도메인 관련 데이터
 
-    @Setter @Column(nullable = false, length = 10000)
-    private String title; // 제목
     @Setter @Column(nullable = false)
+    private String title; // 제목
+    @Setter @Column(nullable = false, length = 10000)
     private String content; //내용
     @Setter
     private String hashtag; // 해시태그
+
+    @ToString.Exclude
+    @OrderBy("id")
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL)
+    // 양방향 바인딩, 실무에서는 편집할때 불편함이 많아서 사용하지 않는 경우가 많다
+    private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
     //메타데이터
     @CreatedDate @Column(nullable = false)
@@ -59,7 +68,7 @@ public class Article {
 
     public static Article of(String title, String content, String hashtag) {
         return new Article(title, content, hashtag);
-    } // of함수는 객체로서 최소조건을 만족한 채 만들어지고
+    } // of 함수는 객체로서 최소조건을 만족한 채 만들어지고
       // entity일 경우 db저장, dto일 경우 네트워크 전송이 바로 가능해야한다
 
         
