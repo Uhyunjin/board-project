@@ -31,10 +31,3 @@ spring:
     console:
       enabled: false
   sql.init.mode : always
-
----
-
-spring:
-  config:
-    activate:
-      on-profile: testdb
