@@ -3,6 +3,7 @@
 
 
 ### 개발환경
+---
 1. Intelli J
 2. Java 17
 3. Gradle
@@ -10,6 +11,7 @@
 
 
 ### 기술 세부 스택
+---
 1. Spring Boot DevTools
 2. Spring Boot Actuator
 3. Spring Web
