@@ -22,9 +22,9 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
 })
-@EntityListeners(AuditingEntityListener.class)
+
 @Entity
-public class ArticleComment {
+public class ArticleComment extends AuditingFields{
     // 도메인 관련 데이터
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,23 +37,7 @@ public class ArticleComment {
     @Column(nullable = false, length = 500)
     private String content; // 본문
 
-    //메타데이터
-    @CreatedDate
-    @Column(nullable = false)
-    private LocalDateTime createdAt; // 생성일시
-
-    @CreatedBy
-    @Column(nullable = false, length = 100)
-    private String createdBy; // 생성자
-    //어노테이션에 의해 auditing 할때마다 jap config에서 bean으로 등록된 unknown으로 입력된다
-
-    @LastModifiedDate
-    @Column(nullable = false)
-    private LocalDateTime modifiedAt; //수정일시
-
-    @LastModifiedBy
-    @Column(nullable = false, length = 100)
-    private String modifiedBy; //수정자
+    //메타데이터 상속 구조 사용
 
     protected ArticleComment() {}
 

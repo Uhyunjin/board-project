@@ -27,7 +27,7 @@ import java.util.Set;
 }) //검색해줄것들, 근데 사이즈가 너무 크면 안됌
 @EntityListeners(AuditingEntityListener.class) //이 어노테이션이 있어야 Auditing 기능이 작동
 @Entity
-public class Article {
+public class Article extends AuditingFields{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,19 +46,7 @@ public class Article {
     // 양방향 바인딩, 실무에서는 편집할때 불편함이 많아서 사용하지 않는 경우가 많다
     private final Set<ArticleComment> articleComments = new LinkedHashSet<>();
 
-    //메타데이터
-    @CreatedDate @Column(nullable = false)
-    private LocalDateTime createdAt; // 생성일시
-
-    @CreatedBy @Column(nullable = false, length = 100)
-    private String createdBy; // 생성자
-    //어노테이션에 의해 auditing 할때마다 jap config에서 bean으로 등록된 unknown으로 입력된다
-
-    @LastModifiedDate @Column(nullable = false)
-    private LocalDateTime modifiedAt; //수정일시
-
-    @LastModifiedBy @Column(nullable = false, length = 100)
-    private String modifiedBy; //수정자
+    //메타데이터를 필드를 추가하지 않고 따로 상속으로 받는 방법으로 처리
 
     protected Article() {} //private은 에러가 난다 hibernate문서 확인하기(my batis 대신 사용)
 
