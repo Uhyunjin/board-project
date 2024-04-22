@@ -16,3 +16,5 @@
 4. Spring Data JPA
 5. MySQL Driver
 
+file:///C:/Users/User/Downloads/usecase.svg
+file:///C:/Users/User/Downloads/project-board-erd.svg
