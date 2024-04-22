@@ -16,5 +16,7 @@
 4. Spring Data JPA
 5. MySQL Driver
 
-file:///C:/Users/User/Downloads/usecase.svg
-file:///C:/Users/User/Downloads/project-board-erd.svg
+### 프로젝트 구성
+---
+![project-board-erd](https://github.com/Uhyunjin/board-project/assets/98440593/f52f02a3-8ada-4d53-8cbc-fd5ac0074135)
+![usecase](https://github.com/Uhyunjin/board-project/assets/98440593/9435561d-eb1d-4c9e-a9bd-abb94b1539b2)
